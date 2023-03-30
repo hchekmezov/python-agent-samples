@@ -1,2 +1,4 @@
 pytest-zebrunner==1.5.7
 selenium==4.8.2
+pytest==7.2.2
+webdriver_manager==3.8.5
