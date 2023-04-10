@@ -12,6 +12,7 @@ def driver():
 
     ############################################################################################
     options = webdriver.FirefoxOptions()
+    # options = webdriver.ChromeOptions()
     options.platform_name = "linux"
     options.browser_version = "109.0"
     options.set_capability("enableVideo", "true")

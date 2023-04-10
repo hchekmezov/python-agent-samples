@@ -16,8 +16,8 @@ logger.addHandler(ZebrunnerHandler())
 logger.setLevel(logging.INFO)
 
 # Test data
-url = "https://www.google.com/"
-cookies_dialog_test = "Before you continue to Google Search"
+url = "https://www.yahoo.com/"
+cookies_dialog_test = "Before you continue to Yahoo Search"
 search_value = "Zebrunner"
 
 
@@ -34,13 +34,13 @@ def test_simple(driver):
         attach_screenshot(driver)
 
     logger.info("Performing search with value: " + search_value)
-    search_field: WebElement = driver.find_element(by=By.XPATH, value="//input[@name='q']")
+    search_field: WebElement = driver.find_element(by=By.XPATH, value="//input[@name='p']")
     search_field.send_keys(search_value)
     search_field.send_keys(Keys.ENTER)
     attach_screenshot(driver)
 
     logger.info("Verify first search result contains: " + search_value)
-    first_link: WebElement = driver.find_element(by=By.XPATH, value="//*[@id='search']//a")
+    first_link: WebElement = driver.find_element(by=By.XPATH, value="//*[@style='line-height:26px']")
     logger.info(first_link.text)
     assert first_link.text.find(search_value) != -1
     logger.info("'test_simple' test was finished")
