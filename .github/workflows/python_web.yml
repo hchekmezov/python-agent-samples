@@ -1,0 +1,28 @@
+name: Selenoid tests
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ my_branch ]
+    
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+    - name: Pull project
+      uses: actions/checkout@v3
+
+    - name: Check files
+      run: ls -a
+      
+    - name: Install python
+    - uses: actions/setup-python@v4
+      with:
+        python-version: '3.10' 
+
+    - name: Setup different needs
+      run: cd sample-pytest && python -m pip install pytest-zebrunner && python -m pip install selenium && python -m pip install pytest
+      
+    - name: Run tests
+      run: python -m pytest -s -v tests/advanced_test.py
