@@ -7,7 +7,7 @@ on:
     
 jobs:
   build:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
 
     steps:
     - name: Pull project
@@ -22,7 +22,7 @@ jobs:
       run: python -m pip install pytest-zebrunner && python -m pip install selenium && python -m pip install pytest
       
     - name: Cd sample-pytest
-      run: cd sample-pytest
+      run: cd sample-pytest && cd sample-pytest
       
     - name: Check files
       run: ls -a
