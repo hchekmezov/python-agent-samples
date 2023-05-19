@@ -12,9 +12,6 @@ jobs:
     steps:
     - name: Pull project
       uses: actions/checkout@v3
-
-    - name: Check files
-      run: ls -a
       
     - name: Install python
       uses: actions/setup-python@v4
@@ -23,6 +20,9 @@ jobs:
 
     - name: Setup different needs
       run: cd sample-pytest && python -m pip install pytest-zebrunner && python -m pip install selenium && python -m pip install pytest
+      
+    - name: Check files
+      run: ls -a
       
     - name: Run tests
       run: python -m pytest -s -v tests/advanced_test.py
