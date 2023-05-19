@@ -2,8 +2,8 @@ name: Selenoid included tests
 
 on:
   workflow_dispatch:
-#   push:
-#     branches: [ my_branch ]
+  push:
+    branches: [ my_branch ]
     
 jobs:
   build:
