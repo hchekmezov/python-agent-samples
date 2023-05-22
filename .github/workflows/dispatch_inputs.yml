@@ -1,32 +1,31 @@
+name: Just a workflow_dispatch test from main branch (Selenoid test)
+
 on:
   workflow_dispatch:
     inputs:
-      logLevel:
-        description: 'Log level'
-        required: true
-        default: 'warning'
+      name:
         type: choice
+        description: Which test need to launch
         options:
-          - info
-          - warning
-          - debug
-      print_tags:
-        description: 'True to print to STDOUT'
-        required: true
-        type: boolean
-      tags:
-        description: 'Test scenario tags'
-        required: true
-        type: string
-      environment:
-        description: 'Environment to run tests against'
-        type: environment
-        required: true
+        - advanced_test
+        - base_test
 
 jobs:
-  print-tag:
+  build:
     runs-on: ubuntu-latest
-    if:  ${{ inputs.print_tags }} 
+
     steps:
-      - name: Print the input tag to STDOUT
-        run: echo  The tags are ${{ inputs.tags }} 
+    - name: Pull project
+      uses: actions/checkout@v3
+    - name: Start selenoid
+      uses: Xotabu4/selenoid-github-action@v2
+    - name: Install python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Setup different needs
+      run: python -m pip install pytest-zebrunner && python -m pip install selenium && python -m pip install pytest
+
+    - name: Run tests
+      run: cd sample-pytest && python -m pytest -s -v tests/${{ github.event.inputs.name }}.py
